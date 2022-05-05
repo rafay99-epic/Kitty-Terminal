@@ -65,6 +65,8 @@ function debian()
 -------------------------------------------------------------------------
 "
     sudo apt-get install zsh -y
+
+    
 }
 function arch()
 {   
@@ -87,10 +89,17 @@ function arch()
 "
     sudo pacman -S zsh --noconfirm
 }
+function program()
+{
+    git clone https://github.com/anhsirk0/fetch-master-6000.git
+    cd fetch-master-6000
+    chmod +x install.sh
+    sudo ./install.sh  
+}
 function run()
 {
     root
-    
     os
+    program
 }
 run
