@@ -117,3 +117,4 @@ alias rm="rm -ir"
 
 # Auto complete
 # znap source marlonrichert/zsh-autocomplete
+eval "$(starship init zsh)"

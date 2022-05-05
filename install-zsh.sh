@@ -91,10 +91,16 @@ function arch()
 }
 function program()
 {
+        echo -ne "
+-------------------------------------------------------------------------
+           Installing Fetch Master 6000
+-------------------------------------------------------------------------
+"
     git clone https://github.com/anhsirk0/fetch-master-6000.git
     cd fetch-master-6000
     chmod +x install.sh
-    sudo ./install.sh  
+    sudo ./install.sh
+    cd ../  
 }
 function run()
 {
