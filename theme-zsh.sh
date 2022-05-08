@@ -31,7 +31,7 @@ function config-theme()
 
 
      # This will install on-my-zsh
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     
     #This will download and config the zsh-snapper manager 
     # git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git

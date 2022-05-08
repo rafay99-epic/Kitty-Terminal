@@ -66,11 +66,11 @@ function begin()
 
     welcome-Message
 
-    give-permissions
+    give_permissions
     
     run-script
 
-    remove-permissions
+    remove_permissions
 
     good-bye
 
