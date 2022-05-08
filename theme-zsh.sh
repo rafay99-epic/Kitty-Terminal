@@ -43,13 +43,13 @@ function config-theme()
     # git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
     # ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
-    echo -ne "
--------------------------------------------------------------------------
-        Installing Oh-My-ZSH 
--------------------------------------------------------------------------
-"
-     # This will install on-my-zsh
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#     echo -ne "
+# -------------------------------------------------------------------------
+#         Installing Oh-My-ZSH 
+# -------------------------------------------------------------------------
+# "
+#      # This will install on-my-zsh
+#     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     
     #This will download and config the zsh-snapper manager 
     # git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git
@@ -63,7 +63,6 @@ function config-theme()
 
 function runner()
 {
-    clear
     echo -ne "
 -------------------------------------------------------------------------
             Running The Config Files...

@@ -62,14 +62,13 @@ function debian()
 -------------------------------------------------------------------------
 "
     sudo apt-get install kitty -y
-    clear
     echo -ne "
 -------------------------------------------------------------------------
            Installing ZSH Shell
 -------------------------------------------------------------------------
 "
     sudo apt-get install zsh -y
-    clear
+    
     
 }
 function arch()
@@ -85,7 +84,6 @@ function arch()
 -------------------------------------------------------------------------
 "
     sudo pacman -S kitty --noconfirm
-    clear
     
     echo -ne "
 -------------------------------------------------------------------------
@@ -93,11 +91,8 @@ function arch()
 -------------------------------------------------------------------------
 "
     sudo pacman -S zsh --noconfirm
-    clear
 
     ccat_program
-    
-    clear
 }
 function ccat_program()
 {
@@ -106,7 +101,6 @@ function ccat_program()
     then 
         if [ ! -e "$PARU" ]; 
         then
-            clear
             echo -ne "
 -------------------------------------------------------------------------
            Installing Paru and ccat
@@ -115,7 +109,6 @@ function ccat_program()
             sudo pacman -S paru --noconfirm --needed
             paru -S ccat --noconfirm --needed
         else
-            clear
             echo -ne "
 -------------------------------------------------------------------------
            Paru is Installed & Installing ccat
@@ -138,7 +131,6 @@ function program()
     chmod +x install.sh
     sudo ./install.sh
     cd ../
-    clear  
 }
 function change-Shell()
 {
@@ -147,21 +139,7 @@ function change-Shell()
            Changing Default Shell to ZSH
 -------------------------------------------------------------------------
 "
-    if [[ "$package_manager" == "pacman" ]];
-    then
-        echo " "
-        echo "Enter Your User Password to change your default shell"
-        chsh -s /bin/zsh  
-    elif [[ "$package_manager" == "apt-get" ]];
-    then
-        echo " "
-        echo "Enter Your User Password to change your default shell"
-        chsh -s /bin/zsh    
-    else
-        echo 'Error Occured: ${package_manager}'
-        exit 0
-    fi
-    clear
+    chsh -s /bin/zsh
 }
 function run()
 {   
