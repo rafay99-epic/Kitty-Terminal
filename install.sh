@@ -51,9 +51,7 @@ function remove_permissions()
 }
 function run-script()
 {
-    clear
     sudo ./install-zsh.sh
-    clear
     ./theme-zsh.sh
     echo -ne "
 -------------------------------------------------------------------------
