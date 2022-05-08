@@ -51,7 +51,7 @@ git clone https://github.com/rafay99-epic/Kitty-Terminal.git
 Once all the files are on your system, then from your terminal. Enter the following command.
 
 ```jsx
-cd kitty-Terminal
+cd Kitty-Terminal
 ```
 
 Once you are in the folder from your terminal then enter the following command to run the application.
