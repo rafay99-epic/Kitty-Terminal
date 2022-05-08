@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Location of Paru
-PARU=/usr/bin/paru
-
 # This will check which package manager your are running 
 declare -A osInfo;
 osInfo[/etc/debian_version]="apt-get"
@@ -74,16 +71,38 @@ function debian()
            Installing LSD
 -------------------------------------------------------------------------
 "
-    sudo dpkg -i lsd.deb    
+    sudo dpkg -i lsd.deb
+
+    echo -ne "
+-------------------------------------------------------------------------
+           Installing Powerline  Fonts
+-------------------------------------------------------------------------
+"
+    sudo apt-get install -y fonts-powerline    
+
+    echo -ne "
+-------------------------------------------------------------------------
+           Installing Awesome Fonts
+-------------------------------------------------------------------------
+"
+    sudo apt-get install -y fonts-font-awesome
     
 }
 function arch()
-{   
-        echo -ne "
+{
+    echo -ne "
 -------------------------------------------------------------------------
             Arch System is Detected
 -------------------------------------------------------------------------
 "
+
+    echo -ne "
+-------------------------------------------------------------------------
+           Installing Paru
+-------------------------------------------------------------------------
+"
+    sudo pacman -S paru --noconfirm --needed    
+
     echo -ne "
 -------------------------------------------------------------------------
            Installing Kitty Terminal
@@ -105,31 +124,26 @@ function arch()
 "
     sudo pacman -S lsd --noconfirm --needed
 
-    ccat_program
-}
-function ccat_program()
-{
+    echo -ne "
+-------------------------------------------------------------------------
+           Installing  ccat
+-------------------------------------------------------------------------
+"
+    paru -S ccat --noconfirm --needed
 
-    if [[ "$package_manager" == "pacman" ]];
-    then 
-        if [ ! -e "$PARU" ]; 
-        then
-            echo -ne "
+    echo -ne "
 -------------------------------------------------------------------------
-           Installing Paru and ccat
+           Installing  Powerline-font
 -------------------------------------------------------------------------
 "
-            sudo pacman -S paru --noconfirm --needed
-            paru -S ccat --noconfirm --needed
-        else
-            echo -ne "
+    paru -S powerline-fonts-git --noconfirm --needed
+
+    echo -ne "
 -------------------------------------------------------------------------
-           Paru is Installed & Installing ccat
+           Installing  Awesome-font
 -------------------------------------------------------------------------
 "
-            paru -S ccat --noconfirm --needed
-        fi
-    fi
+    paru -S font-awesome-5 --noconfirm --needed
 }
 
 function program()
