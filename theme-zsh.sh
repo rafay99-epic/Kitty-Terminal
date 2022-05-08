@@ -17,11 +17,11 @@ function non-root()
 function config-theme()
 {   
     # Placing the files
-    cp -r ~/Set-ZSH/.zshrc  ~/
-    cp -r ~/Set-ZSH/.zsh_history ~/
+    mv ~/Set-ZSH/.zshrc   ~
+    mv ~/Set-ZSH/.zsh_history  ~
 
     # placing the kitty config files
-    cp -r  ~/Set-ZSH/kitty ~/.config/
+    mv   ~/Set-ZSH/kitty ~/.config/
 
 
     # Instaiing starship theme for zsh
