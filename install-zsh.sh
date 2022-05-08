@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Location of Paru
+PARU=/usr/bin/paru
+
 # This will check which package manager your are running 
 declare -A osInfo;
 osInfo[/etc/debian_version]="apt-get"
@@ -52,20 +55,27 @@ function debian()
             Debain System is Detected
 -------------------------------------------------------------------------
 "
+echo " "
+echo -ne "
+-------------------------------------------------------------------------
+            Installing Applications for Setup
+-------------------------------------------------------------------------
+"
+
     echo -ne "
 -------------------------------------------------------------------------
            Installing Kitty Terminal
 -------------------------------------------------------------------------
 "
     sudo apt-get install kitty -y
-
+    clear
     echo -ne "
 -------------------------------------------------------------------------
            Installing ZSH Shell
 -------------------------------------------------------------------------
 "
     sudo apt-get install zsh -y
-
+    clear
     
 }
 function arch()
@@ -75,12 +85,20 @@ function arch()
             Arch System is Detected
 -------------------------------------------------------------------------
 "
+echo " "
+echo -ne "
+-------------------------------------------------------------------------
+            Installing Applications for Setup
+-------------------------------------------------------------------------
+"
+
     echo -ne "
 -------------------------------------------------------------------------
            Installing Kitty Terminal
 -------------------------------------------------------------------------
 "
     sudo pacman -S kitty --noconfirm
+    clear
     
     echo -ne "
 -------------------------------------------------------------------------
@@ -88,7 +106,39 @@ function arch()
 -------------------------------------------------------------------------
 "
     sudo pacman -S zsh --noconfirm
+    clear
+
+    ccat_program
+    
+    clear
 }
+function ccat_program()
+{
+
+    if [[ "$package_manager" == "pacman" ]];
+    then 
+        if [ ! -e "$PARU" ]; 
+        then
+            clear
+            echo -ne "
+-------------------------------------------------------------------------
+           Installing Paru and ccat
+-------------------------------------------------------------------------
+"
+            sudo pacman -S paru --noconfirm --needed
+            paru -S ccat --noconfirm --needed
+        else
+            clear
+            echo -ne "
+-------------------------------------------------------------------------
+           Paru is Installed & Installing ccat
+-------------------------------------------------------------------------
+"
+            paru -S ccat --noconfirm --needed
+        fi
+    fi
+}
+
 function program()
 {
         echo -ne "
@@ -100,12 +150,37 @@ function program()
     cd fetch-master-6000
     chmod +x install.sh
     sudo ./install.sh
-    cd ../  
+    cd ../
+    clear  
+}
+function change-Shell()
+{
+    echo -ne "
+-------------------------------------------------------------------------
+           Changing Default Shell to ZSH
+-------------------------------------------------------------------------
+"
+    if [[ "$package_manager" == "pacman" ]];
+    then
+        echo " "
+        echo "Enter Your User Password to change your default shell"
+        chsh -s /bin/zsh  
+    elif [[ "$package_manager" == "apt-get" ]];
+    then
+        echo " "
+        echo "Enter Your User Password to change your default shell"
+        chsh -s /bin/zsh    
+    else
+        echo 'Error Occured: ${package_manager}'
+        exit 0
+    fi
+    clear
 }
 function run()
 {
     root
     os
     program
+    change-Shell
 }
 run
