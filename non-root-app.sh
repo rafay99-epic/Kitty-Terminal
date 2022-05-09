@@ -38,14 +38,19 @@ function application_install()
            Installing  Powerline-font
 -------------------------------------------------------------------------
 "
+    # There is a confit in font packages that why remoing ttf-hack font 
+    paru -R ttf-hack --noconfirm
+    # Installing powerline font
     paru -S powerline-fonts-git --noconfirm --needed
 
     echo -ne "
 -------------------------------------------------------------------------
            Installing  Awesome-font
 -------------------------------------------------------------------------
-"
-    paru -S font-awesome-5 --noconfirm --needed
+"   
+    # Installing ttf-awesome fonts
+    paru -S ttf-font-awesome --noconfirm --needed
+
 }
 function change-Shell()
 {
