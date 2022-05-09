@@ -43,16 +43,47 @@ function give_permissions()
 {
     chmod +x install-zsh.sh
     chmod +x theme-zsh.sh
+    chmod +x checkOS.sh
 }
 function remove_permissions()
 {
     chmod -x install-zsh.sh
     chmod -x theme-zsh.sh
+    chmod -x checkOS.sh
 }
-function run-script()
+function paru-install()
+{
+    echo -ne "
+-------------------------------------------------------------------------
+           Installing Paru
+-------------------------------------------------------------------------
+"
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
+        makepkg -si
+        cd ../
+}
+function script-run()
 {
     sudo ./install-zsh.sh
     ./theme-zsh.sh
+}
+function run-script()
+{
+    . checkOS.sh
+
+    if [[ "$package_manager" == "pacman" ]];
+    then
+        paru-install
+        script-run
+    elif [[ "$package_manager" == "apt-get" ]];
+    then
+        script-run
+    else
+        echo 'Error Occured: ${package_manager}'
+        exit 0
+    fi
+
     echo -ne "
 -------------------------------------------------------------------------
      Kitty Terminal & ZSh are configured !! ✨ Congratulation ✨ 
