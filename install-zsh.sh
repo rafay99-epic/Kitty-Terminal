@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+. checkOS.sh
 
 function root() 
 {
