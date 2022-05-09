@@ -111,15 +111,7 @@ function program()
     sudo ./install.sh
     cd ../
 }
-function change-Shell()
-{
-    echo -ne "
--------------------------------------------------------------------------
-           Changing Default Shell to ZSH
--------------------------------------------------------------------------
-"
-    chsh -s /bin/zsh
-}
+
 function run()
 {   
     echo -ne "
@@ -130,6 +122,5 @@ function run()
     root
     os
     program
-    change-Shell
 }
 run
