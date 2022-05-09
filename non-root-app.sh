@@ -47,6 +47,15 @@ function application_install()
 "
     paru -S font-awesome-5 --noconfirm --needed
 }
+function change-Shell()
+{
+    echo -ne "
+-------------------------------------------------------------------------
+           Changing Default Shell to ZSH
+-------------------------------------------------------------------------
+"
+    chsh -s /bin/zsh
+}
 function install-non-root-app () 
 {
     echo -ne "
@@ -57,5 +66,6 @@ function install-non-root-app ()
     non-root
     paru-install
     application_install
+    change-Shell
 }
 install-non-root-app
