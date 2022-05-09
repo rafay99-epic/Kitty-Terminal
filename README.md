@@ -6,6 +6,9 @@ In this repo, you can config your kitty terminal using multiple programs. There 
 2. Zsh Shell
 3. starship promote
 4. fetch-master-6000
+5. ttf-awesome fonts
+6. powerline fonts
+7. LSD
 
 # Division of Script:
 
