@@ -44,26 +44,23 @@ function give_permissions()
     chmod +x install-zsh.sh
     chmod +x theme-zsh.sh
     chmod +x checkOS.sh
+    chmod +x non-root-app.sh
 }
 function remove_permissions()
 {
     chmod -x install-zsh.sh
     chmod -x theme-zsh.sh
     chmod -x checkOS.sh
+    chmod -x non-root-app.sh
 }
-function paru-install()
+
+function script-run-arch()
 {
-    echo -ne "
--------------------------------------------------------------------------
-           Installing Paru
--------------------------------------------------------------------------
-"
-        git clone https://aur.archlinux.org/paru.git
-        cd paru
-        makepkg -si
-        cd ../
+    sudo ./install-zsh.sh
+    ./non-root-app.sh
+    ./theme-zsh.sh
 }
-function script-run()
+function run-script-debian()
 {
     sudo ./install-zsh.sh
     ./theme-zsh.sh
@@ -74,11 +71,19 @@ function run-script()
 
     if [[ "$package_manager" == "pacman" ]];
     then
-        paru-install
-        script-run
+        echo -ne "
+-------------------------------------------------------------------------
+            Arch System is Detected
+-------------------------------------------------------------------------"
+        script-run-arch
     elif [[ "$package_manager" == "apt-get" ]];
     then
-        script-run
+        echo -ne "
+-------------------------------------------------------------------------
+            Debain System is Detected
+-------------------------------------------------------------------------
+"
+        run-script-debian
     else
         echo 'Error Occured: ${package_manager}'
         exit 0

@@ -65,7 +65,7 @@ function runner()
 {
     echo -ne "
 -------------------------------------------------------------------------
-            Running The Config Files...
+    Applying Themes & Config Files As User Privillages...
 -------------------------------------------------------------------------
 "
     non-root
