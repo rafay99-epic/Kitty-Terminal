@@ -17,7 +17,7 @@ function welcome-Message()
 {
     echo -ne "
 -------------------------------------------------------------------------
-            Welcome to Config ZSH Shell and Kitty Terminal
+            Welcome to Kitty Terminal & ZSH Config
 
             Author: Abdul Rafay
             Email: 99marafay@gmail.com
