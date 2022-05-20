@@ -65,6 +65,9 @@ Once you are in the folder from your terminal then enter the following command t
 
 Once the script is complete your terminal will look good and much faster. 
 
+# Results:
+![Screenshot_20220520_225516](https://user-images.githubusercontent.com/82662797/169585145-81ad242c-1f70-4a1d-9c53-3a9625de7a0b.png)
+
 # Contact Information:
 
 **Author:** Abdul Rafay
