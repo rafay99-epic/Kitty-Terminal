@@ -263,7 +263,7 @@ function theme()
 -------------------------------------------------------------------------
 "
     # Placing the files
-    mv ~/Kitty-Terminal/.zshrc   ~/
+    mv .zshrc   ~/
     
     echo -ne "
 -------------------------------------------------------------------------
@@ -271,7 +271,7 @@ function theme()
 -------------------------------------------------------------------------
 "
     # placing the kitty config files
-    mv ~/Kitty-Terminal/kitty  ~/.config/
+    mv kitty  ~/.config/
 }
 
 function run()
