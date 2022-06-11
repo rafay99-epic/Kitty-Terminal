@@ -120,8 +120,7 @@ function choose_shell()
             --- Note: use all small caps ---
             --- Enter your Choice ---
 -------------------------------------------------------------------------
-"  
-
+"  user_choice
 
     if [[ "$user_choice" == "fish" ]];
     then
