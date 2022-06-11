@@ -114,24 +114,20 @@ function choose_shell()
         --- 1. Fish Shell ---
         --- 2. ZSh Shell  ---
 -------------------------------------------------------------------------
-"
-    echo -ne "
--------------------------------------------------------------------------
-            --- Enter your Choice ---
--------------------------------------------------------------------------
 "   
     read -p "
 -------------------------------------------------------------------------
+            --- Note: use all small caps ---
             --- Enter your Choice ---
 -------------------------------------------------------------------------
-"  user_choice
+"  $user_choice
 
-    if [[ "$user_choice" == "Fish" ]];
+    if [[ "$user_choice" == "fish" ]];
     then
         git clone https://github.com/rafay99-epic/Fish-Shell.git
         cd Fish-Shell
         ./install.sh
-    elif [[ "$user_choice" == "ZSH"  ]];
+    elif [[ "$user_choice" == "zsh"  ]];
     then     
         git clone https://github.com/rafay99-epic/ZSH-Shell.git
         cd ZSH-Shell
