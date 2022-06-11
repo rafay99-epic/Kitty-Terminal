@@ -120,14 +120,18 @@ function choose_shell()
             --- Enter your Choice ---
 -------------------------------------------------------------------------
 "   
-    read -p  user_choice
+    read -p "
+-------------------------------------------------------------------------
+            --- Enter your Choice ---
+-------------------------------------------------------------------------
+"  user_choice
 
-    if [[ "$user_choice" == "1" ]];
+    if [[ "$user_choice" == "Fish" ]];
     then
         git clone https://github.com/rafay99-epic/Fish-Shell.git
         cd Fish-Shell
         ./install.sh
-    elif [[ "$user_choice" == "2"  ]];
+    elif [[ "$user_choice" == "ZSH"  ]];
     then     
         git clone https://github.com/rafay99-epic/ZSH-Shell.git
         cd ZSH-Shell
