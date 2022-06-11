@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Location for Paru
-PARU=/usr/bin/paru
-
 # This will check which package manager your are running 
 declare -A osInfo;
 osInfo[/etc/debian_version]="apt-get"
@@ -79,7 +76,6 @@ function arch()
 -------------------------------------------------------------------------
 "
     arch_root
-    arch_noroot
 }
 function debian()
 {
@@ -97,199 +93,106 @@ function debian_root()
            Installing Kitty Terminal
 -------------------------------------------------------------------------
 "
-    sudo apt-get install kitty -y
-    echo -ne "
--------------------------------------------------------------------------
-           Installing ZSH Shell
--------------------------------------------------------------------------
-"
-    sudo apt-get install zsh -y
-
-    echo -ne "
--------------------------------------------------------------------------
-           Installing LSD
--------------------------------------------------------------------------
-"
-    sudo dpkg -i lsd.deb
-
-    echo -ne "
--------------------------------------------------------------------------
-           Installing Powerline  Fonts
--------------------------------------------------------------------------
-"
-    sudo apt-get install -y fonts-powerline    
-
-    echo -ne "
--------------------------------------------------------------------------
-           Installing Awesome Fonts
--------------------------------------------------------------------------
-"
-    sudo apt-get install -y fonts-font-awesome
-    
+    sudo apt-get install kitty -y    
 }
 function arch_root()
-{
-    echo -ne "
--------------------------------------------------------------------------
-           Installing Base-Devel Packages
--------------------------------------------------------------------------
-"
-    sudo pacman -S  base-devel  --noconfirm --needed
-      
-
+{      
     echo -ne "
 -------------------------------------------------------------------------
            Installing Kitty Terminal
 -------------------------------------------------------------------------
 "
     sudo pacman -S kitty --noconfirm
-    
-    echo -ne "
--------------------------------------------------------------------------
-           Installing ZSH Shell
--------------------------------------------------------------------------
-"
-    sudo pacman -S zsh --noconfirm
-
-    echo -ne "
--------------------------------------------------------------------------
-           Installing LSD
--------------------------------------------------------------------------
-"
-    sudo pacman -S lsd --noconfirm --needed
-}
-function program()
-{
-        echo -ne "
--------------------------------------------------------------------------
-           Installing Fetch Master 6000
--------------------------------------------------------------------------
-"
-    git clone https://github.com/anhsirk0/fetch-master-6000.git
-    cd fetch-master-6000
-    chmod +x install.sh
-    sudo ./install.sh
-    cd ../
 }
 
-function arch_noroot() 
-{
-    paru-install
-    application_install
-}
-
-
-function paru-install()
-{
-    if [ ! -e "$PARU" ]; 
-        then
-            sudo pacman -S base-devel --noconfirm -needed
-            echo -ne "
--------------------------------------------------------------------------
-           Installing Paru
--------------------------------------------------------------------------
-"
-            git clone https://aur.archlinux.org/paru.git
-            cd paru
-            makepkg -si
-            cd ../
-        else
-            echo -ne "
--------------------------------------------------------------------------
-           Paru is already installed...
--------------------------------------------------------------------------
-"
-        fi    
-}
-
-
-function application_install()
+function choose_shell()
 {
     echo -ne "
 -------------------------------------------------------------------------
-           Installing  ccat
+                --- Choose your Shell ---
+        --- Enter from the Following options: ---
+        --- 1. Fish Shell ---
+        --- 2. ZSh Shell  ---
 -------------------------------------------------------------------------
 "
-    paru -S ccat --noconfirm --needed
-
     echo -ne "
 -------------------------------------------------------------------------
-           Installing  Powerline-font
--------------------------------------------------------------------------
-"
-    # There is a confit in font packages that why remoing ttf-hack font 
-    paru -R ttf-hack --noconfirm
-    # Installing powerline font
-    paru -S powerline-fonts-git --noconfirm --needed
-
-    echo -ne "
--------------------------------------------------------------------------
-           Installing  Awesome-font
+            --- Enter your Choice ---
 -------------------------------------------------------------------------
 "   
-    # Installing ttf-awesome fonts
-    paru -S ttf-font-awesome --noconfirm --needed
+    read -p  user_choice
 
+    if [[ "$user_choice" == "1" ]];
+    then
+        git clone https://github.com/rafay99-epic/Fish-Shell.git
+        cd Fish-Shell
+        ./install.sh
+    elif [[ "$user_choice" == "2"  ]];
+    then     
+        git clone https://github.com/rafay99-epic/ZSH-Shell.git
+        cd ZSH-Shell
+        ./install.sh
+    else
+        echo -ne "
+-------------------------------------------------------------------------
+            --- Sorry You must Choose shell ---
+-------------------------------------------------------------------------
+"  
+        clear
+        choose_shell
+    fi
+}   
+
+function reboot_now()
+{   
+    echo -ne "
+-------------------------------------------------------------------------
+                --- A Reboot is Required ---
+        --- Enter from the Following options: ---
+        --- 1. Yes for Reboot system ---
+        --- 2. No for Exit the application ---
+-------------------------------------------------------------------------
+"
+    echo -ne "
+-------------------------------------------------------------------------
+            --- Enter your Choice ---
+-------------------------------------------------------------------------
+"
+    read -p  user_choice
+
+    if [[ "$user_choice" == "yes" || "$user_choice" == "Yes" || "$user_choice" == "YES" || "$user_choice" == "yEs" || "$user_choice" == "yeS"  ]];
+    then
+
+        reboot
+    elif [[ "$user_choice" == "no" || "$user_choice" == "No" || "$user_choice" == "nO" || "$user_choice" == "NO" ]];
+    then     
+        good-bye
+        exit 0
+    else
+        good-bye
+        exit 0
+    fi
 }
-
-function change-Shell()
-{
-    echo -ne "
--------------------------------------------------------------------------
-           Changing Default Shell to ZSH
-           User Password is Required
--------------------------------------------------------------------------
-"
-    chsh -s /bin/zsh
-}
-function theme()
-{
-    echo -ne "
--------------------------------------------------------------------------
-            Config Themes
--------------------------------------------------------------------------
-"
-    echo -ne "
--------------------------------------------------------------------------
-        Installing  Star-Ship Promote
--------------------------------------------------------------------------
-"
-    # Instaiing starship theme for zsh
-    curl -sS https://starship.rs/install.sh | sh
-
-    echo -ne "
--------------------------------------------------------------------------
-            Placing the Dot Files for ZSH
--------------------------------------------------------------------------
-"
-    # Placing the files
-    mv .zshrc   ~/
-    
-    echo -ne "
--------------------------------------------------------------------------
-        Placing Kitty Terminal Config Files
--------------------------------------------------------------------------
-"
-    # placing the kitty config files
-    mv kitty  ~/.config/
-}
-
 function run()
 {   
     # Welcome Message
     welcome-Message
+    
     # check no root
     non-root
+    
     # check os and then install application
     os
-    # install fm60000  
-    program
-    # config theme and install startpromte
-    theme
-    #change shell 
-    change-Shell
-    # good Bye message
+    
+    # This will give th user two choice to choose a shell
+    # 1. ZSH Shell 
+    # 2. Fish shell
+    choose_shell
+
+    # Reboot option
+    reboot_now
+    
+    # good bye message
     good-bye
-    exit 0
 }
 run
