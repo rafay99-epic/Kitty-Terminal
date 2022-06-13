@@ -142,7 +142,10 @@ function choose_shell()
         choose_shell
     fi
 }   
-
+function config_kitty()
+{
+    cp -r kitty ~/.config
+}
 function reboot_now()
 {   
     echo -ne "
@@ -183,6 +186,9 @@ function run()
     
     # check os and then install application
     os
+    
+    # this will config the kitty terminal
+    config_kitty
     
     # This will give th user two choice to choose a shell
     # 1. ZSH Shell 
